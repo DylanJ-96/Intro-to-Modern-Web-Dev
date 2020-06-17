@@ -4,21 +4,35 @@ import ReactDOM from 'react-dom'
 const Header = ({ title }) => (< h2 > {title} </h2>)
 
 const Statistic = ({ text, value }) => (
-  <div>{text} {value}</div>
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 )
 const Total = ({ total }) => {
-  return (<div>all {total}</div>)
+  return (
+    <tr>
+      <td>all</td>
+      <td>{total}</td>
+    </tr >
+  )
 }
 const Avg = ({ val1, val3, total }) => {
   const avg = (val1 - val3) / total
   return (
-    <div>average {avg}</div>
+    <tr>
+      <td>average</td>
+      <td>{avg}</td>
+    </tr>
   )
 }
 const Positive = ({ val1, total }) => {
   const pos = val1 / total
   return (
-    <div>positive {pos}</div>
+    <tr>
+      <td>positive</td>
+      <td>{pos}</td>
+    </tr >
   )
 }
 
@@ -30,11 +44,11 @@ const Button = ({ onClick, text }) => (
 
 const Statistics = ({ val1, val2, val3 }) => {
   return (
-    <div>
+    <tbody>
       <Statistic text="good" value={val1} />
       <Statistic text="neutral" value={val2} />
       <Statistic text="bad" value={val3} />
-    </div>
+    </tbody>
   )
 }
 
@@ -43,12 +57,12 @@ const History = ({ val1, val2, val3 }) => {
   console.log(total)
   if (total > 0)
     return (
-      <div>
+      <table>
         <Statistics val1={val1} val2={val2} val3={val3} />
-        <Total total={total} />
-        <Avg val1={val1} val3={val3} total={total} />
-        <Positive val1={val1} total={total} />
-      </div>
+        <tbody><Total total={total} /></tbody>
+        <tbody><Avg val1={val1} val3={val3} total={total} /></tbody>
+        <tbody><Positive val1={val1} total={total} /></tbody>
+      </table >
     )
   else return (<div>No feedback give</div>)
 }
