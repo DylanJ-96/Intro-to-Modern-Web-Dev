@@ -5,12 +5,26 @@ const Button = ({ onClick, text }) => (
   <button onClick={onClick}>
     {text}
   </button>
-
 )
+
+const Header = ({ title }) => (<h1> {title} </h1>)
+
+const MostVotes = ({ anecdotes, selected, votes }) => {
+  let maxIndex = votes.indexOf(Math.max(...votes))
+  return (
+    <div>
+      <p>{anecdotes[maxIndex]}</p>
+      <p>has {votes[maxIndex]} votes</p>
+    </div>
+  )
+}
+
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
   const [votes, setVote] = useState(Array(6).fill(0))
+  const title = 'Anecdote of the day'
+  const title2 = 'Anecdote with most votes'
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -32,11 +46,14 @@ const App = (props) => {
 
   return (
     console.log(selected),
-    < div >
+    <div>
+      <Header title={title} />
       <p>{props.anecdotes[selected]}</p>
       < Button onClick={handleVoteClick} text='vote' />
       < Button onClick={selectNextClick} text='next anecdote' />
-    </div >
+      <Header title={title2} />
+      <MostVotes anecdotes={anecdotes} selectec={selected} votes={votes} />
+    </div>
   )
 }
 
