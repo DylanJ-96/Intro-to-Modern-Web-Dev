@@ -9,6 +9,25 @@ const Statistics = ({ name, value }) => {
   )
 }
 
+const Total = ({ val1, val2, val3 }) => {
+  const all = val1 + val2 + val3
+  return (<div>all {all}</div>)
+}
+const Avg = ({ val1, val2, val3 }) => {
+  const all = val1 + val2 + val3
+  const avg = (val1 - val3) / all
+  return (
+    <div>average {avg}</div>
+  )
+}
+const Positive = ({ val1, val2, val3 }) => {
+  const all = val1 + val2 + val3
+  const pos = val1 / all
+  return (
+    <div>Pos {pos}</div>
+  )
+}
+
 const Button = ({ onClick, text }) => (
   <button onClick={onClick}>
     {text}
@@ -44,6 +63,9 @@ const App = () => {
       <Statistics name='good' value={good} />
       <Statistics name='neutral' value={neutral} />
       <Statistics name='bad' value={bad} />
+      <Total val1={good} val2={neutral} val3={bad} />
+      <Avg val1={good} val2={neutral} val3={bad} />
+      <Positive val1={good} val2={neutral} val3={bad} />
     </div>
   )
 }
