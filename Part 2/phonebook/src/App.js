@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 
 const App = () => {
     const [persons, setPersons] = useState([
-        { name: 'Arto Hellas' }
+        { name: 'Arto Hellas', number: 1112223333 }
     ])
     const [newName, setNewName] = useState('')
+    const [newNumber, setNewNumber] = useState('')
 
-    const addName = (event) => {
+    const addContact = (event) => {
         event.preventDefault()
 
         if (persons.some(person => person.name === newName)) {
@@ -15,6 +16,7 @@ const App = () => {
         else {
             const nameObject = {
                 name: newName,
+                number: newNumber,
                 //id: persons.length + 1,
             }
 
@@ -27,23 +29,46 @@ const App = () => {
         console.log(event.target.value)
         setNewName(event.target.value)
     }
+    const handleNumberChange = (event) => {
+        console.log(event.target.value)
+        setNewNumber(event.target.value)
+    }
 
     console.log(newName)
 
-    console.log(persons.map((persons) => persons.name))
+    console.log(persons)
 
     return (
         <div>
             <h2>Phonebook</h2>
-            <form onSubmit={addName}>
-                <input
-                    value={newName}
-                    onChange={handleNameChange}
-                />
-                <button type="submit">add</button>
+
+            <form onSubmit={addContact}>
+                <div>
+                    name:
+                    <input
+                        value={newName}
+                        onChange={handleNameChange}
+                    />
+                </div>
+                <div>
+                    number:
+                    <input
+                        value={newNumber}
+                        onChange={handleNumberChange}
+                    />
+                </div>
+                <div>
+                    <button type="submit">add</button>
+                </div>
+
             </form>
+
             <h2>Numbers</h2>
-            <div>{persons.map((persons) => <div key={persons.name}>{persons.name}</div>)}</div>
+
+            <div>
+                {persons.map((persons) => <div key={persons.name}>{persons.name} {persons.number}</div>)}
+            </div>
+
         </div>
     )
 }
